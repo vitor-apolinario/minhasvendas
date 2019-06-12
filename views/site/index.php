@@ -28,8 +28,8 @@ $this->title = 'My Yii Application';
                 [
                     'label' => 'Produtos',
                     'content' => [
-                        'Novo produto',
-                        'Meus produtos'
+                        '<a href="?r=produto/index">Novo Produto</a>',
+                        '<a href="?r=produto/index">Meus Produtos</a>'
                     ],
                 ],
                 [

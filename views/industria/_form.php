@@ -57,6 +57,7 @@ use yii\bootstrap\Button;
                 
                 cidades  = '<option value="text">Selecionar...</option>\n';
                 cidades += '<optgroup label="options">\n';
+                // isto é uma adaptação técnica
                 for (city  in resultado){
                     if(resultado[city].microrregiao.mesorregiao.UF.sigla == uf)
                         cidades += `<option value="${resultado[city].id}">${resultado[city].nome}</option>\n`;
