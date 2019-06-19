@@ -17,8 +17,8 @@ class ProdutoSearch extends Produto
     public function rules()
     {
         return [
-            [['cd_prod', 'cd_fk_indu'], 'integer'],
-            [['nm_prod', 'undmed', 'desc', 'grupo'], 'safe'],
+            [['cd_prod'], 'integer'],
+            [['nm_prod', 'undmed', 'desc', 'grupo', 'cd_fk_indu'], 'safe'],
             [['comiss'], 'number'],
         ];
     }
@@ -42,6 +42,7 @@ class ProdutoSearch extends Produto
     public function search($params)
     {
         $query = Produto::find();
+        $query->joinWith(['industria']);
 
         // add conditions that should always apply here
 
@@ -60,14 +61,15 @@ class ProdutoSearch extends Produto
         // grid filtering conditions
         $query->andFilterWhere([
             'cd_prod' => $this->cd_prod,
-            'cd_fk_indu' => $this->cd_fk_indu,
+            // 'cd_fk_indu' => $this->cd_fk_indu,
             'comiss' => $this->comiss,
         ]);
 
         $query->andFilterWhere(['like', 'nm_prod', $this->nm_prod])
             ->andFilterWhere(['like', 'undmed', $this->undmed])
             ->andFilterWhere(['like', 'desc', $this->desc])
-            ->andFilterWhere(['like', 'grupo', $this->grupo]);
+            ->andFilterWhere(['like', 'grupo', $this->grupo])
+            ->andFilterWhere(['like', 'industria.nm_indu', $this->cd_fk_indu]);
 
         return $dataProvider;
     }

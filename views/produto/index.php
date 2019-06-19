@@ -28,7 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'cd_prod',
             'nm_prod',
-            'cd_fk_indu',
+            [
+                'attribute' => 'cd_fk_indu',
+                'value' =>  'industria.nm_indu'
+            ],
             'undmed',
             'comiss',
             //'desc:ntext',

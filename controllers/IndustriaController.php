@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Industria;
+use app\models\Produto;
 use app\models\IndustriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -104,6 +105,10 @@ class IndustriaController extends Controller
      */
     public function actionDelete($id)
     {
+        if(Produto::find()->where(['cd_fk_indu' => $id])->one())
+            return $this->redirect(['index']);
+
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

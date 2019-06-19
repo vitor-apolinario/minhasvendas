@@ -49,7 +49,7 @@ use yii\bootstrap\Button;
 
     <?= $form->field($model, 'nm_indu')->textInput(['maxlength' => true])->label('Nome') ?>
 
-    <?= $form->field($model, 'estado')->dropDownList(['text' => 'Selecionar...', 'options' => $estadosBrasileiros])->label('Estado') ?>
+    <?= $form->field($model, 'estado')->dropDownList(['text' => 'Selecionar...', 'Opções' => $estadosBrasileiros])->label('Estado') ?>
 
     <script>
         function teste(uf, campocidade){
@@ -77,7 +77,7 @@ use yii\bootstrap\Button;
         );
     ?>
 
-    <?= $form->field($model, 'cidade')->dropDownList(['text' => 'Selecionar...', 'options' => $estadosBrasileiros])->label('Cidade') ?>
+    <?= $form->field($model, 'cidade')->dropDownList(['text' => 'Selecionar...'])->label('Cidade') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>

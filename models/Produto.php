@@ -53,20 +53,36 @@ class Produto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cd_prod' => 'Cd Prod',
-            'nm_prod' => 'Nm Prod',
-            'cd_fk_indu' => 'Cd Fk Indu',
-            'undmed' => 'Undmed',
-            'comiss' => 'Comiss',
-            'desc' => 'Desc',
+            'cd_prod' => 'Código',
+            'nm_prod' => 'Nome',
+            'cd_fk_indu' => 'Código do fabricante',
+            'undmed' => 'Unidade de medida',
+            'comiss' => 'Comissão',
+            'desc' => 'Descrição',
             'grupo' => 'Grupo',
+            'industria.nm_indu' => 'Indústria',
         ];
+    }
+
+    public static function grupo($cod){
+        $grupos = array(
+            'MIN' => 'MATERIAIS DE ORIGEM MINERAL',
+            'MAD' => 'MADEIRAS E DERIVADOS',
+            'VID' => 'VIDROS PARA CONSTRUCAO',
+            'REV' => 'MATERIAIS PARA PISOS, PAREDES E TETOS',
+            'COB' => 'MATERIAIS PARA COBERTURAS',
+            'FER' => 'ESQUADRIAS E FERRAGENS',
+            'ARQ' => 'ARTIGOS METALICOS PARA ARQUITETURA',
+            'DIV' => 'CONSTRUCAO CIVIL - DIVERSOS'
+        );
+
+        return $grupos[$cod];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCdFkIndu()
+    public function getIndustria()
     {
         return $this->hasOne(Industria::className(), ['cd_indu' => 'cd_fk_indu']);
     }
@@ -82,7 +98,7 @@ class Produto extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNumFkVendas()
+    public function getVendas()
     {
         return $this->hasMany(Venda::className(), ['num_venda' => 'num_fk_venda', 'cd_fk_indu' => 'cd_fk_indu'])->viaTable('venda_item', ['cd_fk_prod' => 'cd_prod', 'cd_fk_indu' => 'cd_fk_indu']);
     }

@@ -50,14 +50,14 @@ class Cliente extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cd_cli' => 'Cd Cli',
-            'nm_cli' => 'Nm Cli',
-            'cpf' => 'Cpf',
-            'cnpj' => 'Cnpj',
+            'cd_cli' => 'Código',
+            'nm_cli' => 'Nome',
+            'cpf' => 'CPF',
+            'cnpj' => 'CNPJ',
             'telefone' => 'Telefone',
             'estado' => 'Estado',
             'cidade' => 'Cidade',
-            'endereco' => 'Endereco',
+            'endereco' => 'Endereço',
         ];
     }
 

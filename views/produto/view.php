@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'cd_prod' => $model->cd_prod, 'cd_fk_indu' => $model->cd_fk_indu], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Realmente deseja deletar esse registro?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -31,11 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'cd_prod',
             'nm_prod',
-            'cd_fk_indu',
+            'industria.nm_indu',
             'undmed',
             'comiss',
-            'desc:ntext',
-            'grupo',
+            'desc:ntext',        
+            ['attribute' => 'Grupo', 'value' => $model::grupo($model->grupo)]
         ],
     ]) ?>
 
