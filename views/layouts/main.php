@@ -35,7 +35,7 @@ AppAsset::register($this);
     </a>
     <hr>
     <div style="display: flex; justify-content: space-around;">
-        <a href="/index.php"><i class="far fa-money-bill-alt fa-3x"></i></a>
+        <a href="/?r=venda/index"><i class="far fa-money-bill-alt fa-3x"></i></a>
         <a href="/?r=industria/index"><i class="fas fa-industry fa-3x"></i></a>
         <a href="?r=cliente/index"><i class="fas fa-users fa-3x"></i></a>
         <a href="/?r=produto/index"><i class="fas fa-cart-plus fa-3x"></i></a>

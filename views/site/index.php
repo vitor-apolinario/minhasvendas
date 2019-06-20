@@ -14,8 +14,8 @@ $this->title = 'My Yii Application';
                 [
                     'label' => 'Vendas',
                     'content' => [
-                        'Nova venda',
-                        'Minhas vendas',
+                        '<a href="?r=venda/create">Nova Venda</a>',
+                        '<a href="?r=venda/index">Minhas Vendas</a>',
                     ],
                 ],
                 [
