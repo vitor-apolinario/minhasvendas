@@ -46,7 +46,7 @@ create table venda(
     constraint `fk_cliente_venda` foreign key (`cd_fk_cliente`) references cliente(`cd_cli`),
     primary key(`num_venda`, `cd_fk_indu`)
 ) engine = innodb;
-drop table venda;
+-- drop table venda;
 
 create table venda_item(
 	-- -------fk produto----------
@@ -63,7 +63,7 @@ create table venda_item(
     constraint `fk_venda_item_venda` foreign key (`num_fk_venda`, `cd_fk_indu`) references venda(`num_venda`, `cd_fk_indu`),
     primary key(`cd_fk_prod`, `num_fk_venda`, `cd_fk_indu`)
 ) engine = innodb;
-drop table venda_item;
+-- drop table venda_item;
 
 create table titulo(
     `dt_vencimento` date not null,
@@ -76,33 +76,32 @@ create table titulo(
     constraint `fk_titulo_venda` foreign key (`num_fk_venda`, `cd_fk_indu_venda`) references venda(`num_venda`, `cd_fk_indu`),
     primary key(`dt_vencimento`,`num_fk_venda`,`cd_fk_indu_venda`)
 ) engine = innodb;
--- ALTER TABLE titulo MODIFY COLUMN `vlr_titulo` decimal(12,4) not null;
-drop table titulo;
+-- drop table titulo;
 
-insert into industria values (1, 'Brasilit', 'RS', 'Porto Alegre'), 
-							 (2, 'Macaferri', 'SP', 'São Paulo');
-select * from industria;
+INSERT INTO minhasvendas.cliente
+(cd_cli, nm_cli, cpf, cnpj, telefone, estado, cidade, endereco)
+values
+	(1, 'Cliente1', 12312312312, NULL, '40028922', 'SC', 'Chapecó', 'Rua das gaivotas'),
+	(2, 'Cliente2', 12312312312, NULL, '45599223', 'SP', 'São Paulo', 'Rua Pereá'),
+	(3, 'Cliente3', 12312312312, NULL, '47123332', 'PR', 'Curitiba', 'Rua Chow Chow');
 
-insert into produto values (1, 'Telha 5mm', 1, 'PLT', 100.56, 'Telha mt legal', 'COBERTURAS'), 
-						   (2, 'Telha 7mm', 1, 'PLT', 100.56, 'Telha mt legal mais grossa', 'COBERTURAS'), 
-						   (1, 'Arame farpado', 2, '100M', 2.54, 'cortaa bastante', 'CERCAS'),
-                           (2, 'Arame cerca elétrica', 2, '100M', 2.65, 'eletrocuta bastante', 'CERCAS');
-select * from produto p join industria i where i.cd_indu = p.cd_fk_indu;
-delete from produto where cd_prod in (1,2);
+INSERT INTO minhasvendas.industria
+(cd_indu, nm_indu, estado, cidade)
+values
+	(1, 'Indústria1', 'SC', 'Chapecó'),
+	(2, 'Indústria2', 'SP', 'São Paulo'),
+	(3, 'Indústria3', 'PR', 'Curitiba');
 
-insert into cliente values (1, 'Laercio Cyrus', '12364788', null, '99882236', 'SC', 'Chapecó', 'R. das aguias pretas bairro batatinha'), 
-						   (2, 'Severo snape', null, '0119982009', '49333298855', 'SC', 'Caibi', 'Rua entrada pra chapeco saida jundiai');
-select * from cliente;						
+INSERT INTO minhasvendas.produto
+(cd_prod, nm_prod, cd_fk_indu, undmed, comiss, `desc`, grupo)
+values
+	(1, 'Telha',  1, 'TON', 5,  'Telha 255 x 22 mm sem amianto', 'COB'),
+	(1, 'Tijolo', 2, 'MIL', 52, 'Tijolo maçico blindado', 'REV'),
+	(1, 'Prego',  3, 'KGS', 36, 'Prego galvanizado', 'FER');
 
-insert into venda values (55,  1, 1, 0, '30/60/90', 600, current_date(), current_timestamp()),
-						 (265, 2, 2, 0, '30/60/90', 600, current_date(), current_timestamp());
-delete from venda where `num_venda` in (55);
-
-insert into venda_item values (1, 55, 1, 'PLT', 2, 200),
-							  (2, 55, 1, 'PLT', 2, 400);
-delete from venda_item where cd_fk_prod = 1;
-
-select * from venda v join venda_item vi where vi.num_fk_venda = v.num_venda and vi.cd_fk_indu = v.cd_fk_indu join produto p on p.cd_prod = vi.cd_prod and p.cd_fk_indu = vi.cd_fk_indu;
-
-
-
+INSERT INTO minhasvendas.venda
+(num_venda, cd_fk_indu, cd_fk_cliente, recebido, frm_pgto, vlr_total, dt_venda, dt_cadastro)
+values
+	(1, 1, 3, 0, 'À VISTA',  512.16,   current_timestamp(), current_timestamp()),
+	(1, 2, 2, 0, '30/60/90', 2266.29,  current_timestamp(), current_timestamp()),
+	(1, 3, 1, 0, '15/45/55', 14145.43, current_timestamp(), current_timestamp());
